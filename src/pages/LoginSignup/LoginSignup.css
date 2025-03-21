@@ -1,0 +1,78 @@
+.login-signup-container {
+  background-color: skyblue;
+  min-height: 100vh;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.form-container {
+  width: 100%;
+  max-width: 450px;
+}
+
+.card {
+  border-radius: 1rem;
+  border: none;
+}
+
+.card-body {
+  padding: 2rem;
+}
+
+.card-title {
+  font-weight: bold;
+  color: #333;
+  font-size: 2rem;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+
+.text-primary {
+  color: #007bff !important;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.form-check-label {
+  font-size: 0.875rem;
+  color: #6c757d;
+}
+
+.form-control-lg {
+  font-size: 1rem;
+}
+
+@media (max-width: 576px) {
+  .card-body {
+    padding: 1.5rem;
+  }
+
+  .card-title {
+    font-size: 1.75rem;
+  }
+
+  .form-control-lg {
+    font-size: 0.9rem;
+  }
+
+  .btn-lg {
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .form-container {
+    max-width: 500px;
+  }
+}
+

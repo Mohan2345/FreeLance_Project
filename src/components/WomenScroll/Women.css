@@ -1,0 +1,282 @@
+.women-scrollable-cards-container {
+    position: relative;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+}
+
+.women-cards-wrapper {
+    display: flex;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    gap: 24px;
+    padding: 20px 0;
+    width: 100%;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    transition: all 0.3s ease-in-out;
+}
+
+.women-cards-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+.women-card {
+    flex: 0 0 auto;
+    width: 350px;
+    height: 500px;
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.women-card:hover {
+    transform: translateY(-10px) scale(1.03);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.women-card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.women-card:hover .women-card-image {
+    transform: scale(1.1);
+}
+
+.women-card-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+    padding: 25px 15px 15px;
+    text-align: center;
+    opacity: 0.9;
+    transition: opacity 0.3s ease;
+}
+
+.women-card:hover .women-card-overlay {
+    opacity: 1;
+}
+
+.women-card-title {
+    color: white;
+    font-size: 1.6rem;
+    margin: 0;
+    font-weight: 600;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+    transform: translateY(5px);
+    transition: transform 0.3s ease;
+}
+
+.women-card:hover .women-card-title {
+    transform: translateY(0);
+}
+
+.women-scroll-button {
+    background-color: rgba(255, 255, 255, 0.9);
+    border: none;
+    color: #333;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.women-scroll-button:hover {
+    background-color: white;
+    transform: translateY(-50%) scale(1.1);
+    color: #000;
+}
+
+.women-scroll-button:active {
+    transform: translateY(-50%) scale(0.95);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.women-scroll-button.women-left {
+    left: 10px;
+}
+
+.women-scroll-button.women-right {
+    right: 10px;
+}
+
+.women-arrow {
+    display: block;
+    transition: transform 0.3s ease;
+    font-family: monospace;
+}
+
+.women-scroll-button:hover .women-arrow {
+    transform: scale(1.2);
+}
+
+.women-scroll-button.women-left:active .women-arrow {
+    transform: translateX(-2px);
+}
+
+.women-scroll-button.women-right:active .women-arrow {
+    transform: translateX(2px);
+}
+
+.women-section-title {
+    font-size: 2rem;
+    font-weight: 500;
+    color: #333;
+    letter-spacing: 1px;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .women-scrollable-cards-container {
+        max-width: 1140px;
+        padding: 0 50px;
+    }
+
+    .women-card {
+        width: 300px;
+        height: 428px;
+    }
+
+    .women-card-title {
+        font-size: 1.4rem;
+    }
+
+    .women-scroll-button {
+        width: 44px;
+        height: 44px;
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 992px) {
+    .women-scrollable-cards-container {
+        max-width: 960px;
+        padding: 0 45px;
+    }
+
+    .women-card {
+        width: 250px;
+        height: 357px;
+    }
+
+    .women-card-title {
+        font-size: 1.3rem;
+    }
+
+    .women-scroll-button {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .women-scrollable-cards-container {
+        max-width: 720px;
+        padding: 0 40px;
+    }
+
+    .women-card {
+        width: 220px;
+        height: 314px;
+    }
+
+    .women-card-title {
+        font-size: 1.2rem;
+    }
+
+    .women-scroll-button {
+        width: 36px;
+        height: 36px;
+        font-size: 18px;
+    }
+
+    .women-section-title {
+        font-size: 1.75rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .women-scrollable-cards-container {
+        max-width: 540px;
+        padding: 0 30px;
+    }
+
+    .women-card {
+        width: 180px;
+        height: 257px;
+    }
+
+    .women-card-title {
+        font-size: 1rem;
+    }
+
+    .women-scroll-button {
+        width: 32px;
+        height: 32px;
+        font-size: 16px;
+    }
+
+    .women-section-title {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .women-scrollable-cards-container {
+        max-width: 100%;
+        padding: 0 20px;
+    }
+
+    .women-card {
+        width: 150px;
+        height: 214px;
+    }
+
+    .women-card-title {
+        font-size: 0.9rem;
+    }
+
+    .women-scroll-button {
+        width: 28px;
+        height: 28px;
+        font-size: 14px;
+    }
+
+    .women-section-title {
+        font-size: 1.25rem;
+    }
+}
+
+/* Ensure no horizontal scrollbar globally */
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+}

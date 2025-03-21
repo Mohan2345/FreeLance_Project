@@ -1,0 +1,105 @@
+ /* ScrollingText.css - Updated for centered text with bottom spacing */
+.scrolling-container {
+    width: 100vw;
+    max-width: 100%;
+    overflow: hidden;
+    background-color: #f5f5f5;
+    padding: clamp(40px, 5vw, 60px) 0 clamp(60px, 7vw, 80px) 0; /* Increased bottom padding */
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    position: relative;
+    height: clamp(140px, 20vh, 200px); /* Increased height for better centering */
+    margin-top: clamp(20px, 3vh, 40px);
+    margin-bottom: clamp(20px, 3vh, 40px);
+    display: flex; /* Added flexbox for vertical centering */
+    align-items: center; /* Centers content vertically */
+  }
+  
+  .scrolling-text {
+    display: flex;
+    width: max-content;
+    animation: scroll 20s linear infinite;
+  }
+  
+  .text-item {
+    white-space: nowrap;
+    font-family: "Futura", sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    color: #2C3E50;
+    font-size: 46px;
+    line-height: 76px;
+    padding: 0 clamp(15px, 2.5vw, 25px);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Animation keyframes */
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-33.33%);
+    }
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 1024px) {
+    .scrolling-text {
+      animation: scroll 18s linear infinite;
+    }
+    
+    .text-item {
+      font-size: 40px;
+      line-height: 66px;
+    }
+    
+    .scrolling-container {
+      height: clamp(120px, 18vh, 170px);
+      padding: clamp(30px, 4vw, 50px) 0 clamp(50px, 6vw, 70px) 0;
+      margin-top: clamp(15px, 2.5vh, 30px);
+      margin-bottom: clamp(15px, 2.5vh, 30px);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .scrolling-text {
+      animation: scroll 16s linear infinite;
+    }
+    
+    .text-item {
+      font-size: 34px;
+      line-height: 56px;
+    }
+    
+    .scrolling-container {
+      height: clamp(100px, 15vh, 140px);
+      padding: clamp(25px, 3.5vw, 40px) 0 clamp(40px, 5vw, 60px) 0;
+      margin-top: clamp(10px, 2vh, 25px);
+      margin-bottom: clamp(10px, 2vh, 25px);
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .scrolling-container {
+      padding: clamp(20px, 3vw, 30px) 0 clamp(30px, 4vw, 40px) 0;
+      height: clamp(90px, 12vh, 120px);
+      margin-top: clamp(8px, 1.5vh, 20px);
+      margin-bottom: clamp(8px, 1.5vh, 20px);
+    }
+    
+    .scrolling-text {
+      animation: scroll 14s linear infinite;
+    }
+    
+    .text-item {
+      font-size: 28px;
+      line-height: 46px;
+      padding: 0 clamp(10px, 2vw, 20px);
+    }
+  }
+  
+  /* Pause animation on hover */
+  .scrolling-container:hover .scrolling-text {
+    animation-play-state: paused;
+  }

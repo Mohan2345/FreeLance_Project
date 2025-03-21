@@ -1,0 +1,107 @@
+ /* Book.css - Enhanced for full responsiveness */
+.book-section {
+  position: relative;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px; /* Added padding for smaller screens */
+}
+
+.book-title {
+  color: white;
+  font-size: clamp(1.8rem, 5vw, 2.5rem); /* Fluid typography */
+  text-transform: uppercase;
+  letter-spacing: clamp(2px, 0.5vw, 4px); /* Fluid letter spacing */
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.book-subtitle {
+  color: white;
+  font-size: clamp(0.9rem, 2.5vw, 1.1rem); /* Fluid typography */
+  text-align: center;
+  max-width: 90%; /* Changed to percentage for flexibility */
+  margin-bottom: 2rem;
+}
+
+.book-button {
+  background-color: white !important;
+  color: black !important;
+  padding: clamp(8px, 2vw, 10px) clamp(20px, 4vw, 30px) !important; /* Fluid padding */
+  letter-spacing: clamp(1px, 0.3vw, 2px); /* Fluid letter spacing */
+  transition: all 0.3s ease;
+  font-size: clamp(0.9rem, 2vw, 1rem); /* Fluid font size */
+}
+
+.book-button:hover {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  transform: translateY(-2px);
+}
+
+/* Enhanced media queries for various breakpoints */
+@media (max-width: 1024px) {
+  .book-title {
+      font-size: clamp(1.6rem, 4vw, 2rem);
+  }
+  
+  .book-subtitle {
+      max-width: 85%;
+  }
+}
+
+@media (max-width: 768px) {
+  .book-section {
+      height: 80vh; /* Slightly shorter for tablets */
+  }
+
+  .overlay {
+      padding: 15px;
+  }
+
+  .book-title {
+      font-size: clamp(1.4rem, 3.5vw, 1.8rem);
+  }
+
+  .book-subtitle {
+      max-width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  .book-section {
+      height: 70vh; /* Shorter for mobile */
+  }
+
+  .overlay {
+      padding: 10px;
+  }
+
+  .book-title {
+      font-size: clamp(1.2rem, 3vw, 1.5rem);
+      margin-bottom: 0.75rem;
+  }
+
+  .book-subtitle {
+      font-size: clamp(0.8rem, 2vw, 0.95rem);
+      margin-bottom: 1.5rem;
+  }
+
+  .book-button {
+      padding: clamp(6px, 1.5vw, 8px) clamp(15px, 3vw, 20px) !important;
+  }
+}
