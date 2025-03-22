@@ -1,33 +1,54 @@
- // CheckoutPage.jsx
+
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
-import { useLocation, useNavigate } from "react-router-dom"; // Added useNavigate
+import { useLocation, useNavigate } from "react-router-dom";
+import { useCart } from "../../CartContext/CartContext";
 import "./CheckoutPage.css";
 
 const CheckoutPage = () => {
   const location = useLocation();
-  const navigate = useNavigate(); // For redirecting if cart is empty
-  const { cartItems: passedCartItems = [], discount = 0, isCouponApplied = false } =
-    location.state || {}; // Default to empty array if no state
+  const navigate = useNavigate();
+  const {
+    cartItems: contextCartItems,
+    completeOrder,
+    couponCode,
+    setCouponCode,
+    discount,
+    isCouponApplied,
+    applyCoupon,
+    getTotalPrice,
+    getFinalTotal,
+  } = useCart();
+  const { cartItems: passedCartItems = [] } = location.state || {}; // No need for discount/isCouponApplied from state
   const [paymentMethod, setPaymentMethod] = useState("online");
-  const DISCOUNT_AMOUNT = 700;
 
-  const calculateSubtotal = () => {
-    return passedCartItems.reduce((total, item) => total + item.price * item.quantity, 0);
-  };
-  const calculateTotal = () => Math.max(0, calculateSubtotal() - (isCouponApplied ? discount : 0));
+  // Use context cart items if available, otherwise fall back to passed items
+  const cartItems = contextCartItems.length > 0 ? contextCartItems : passedCartItems;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (paymentMethod === "online") {
-      alert("Redirecting to payment gateway...");
-    } else {
-      alert("Order placed successfully! Pay on delivery.");
+    if (cartItems.length === 0) {
+      alert("No items in cart to order.");
+      return;
+    }
+
+    const success = completeOrder();
+    if (success) {
+      if (paymentMethod === "online") {
+        alert("Redirecting to payment gateway...");
+      } else {
+        alert("Order placed successfully! Pay on delivery.");
+      }
+      navigate("/my-orders");
     }
   };
 
-  // Redirect to cart if no items are passed (e.g., on refresh or direct access)
-  if (passedCartItems.length === 0) {
+  const handleApplyCoupon = () => {
+    applyCoupon(couponCode);
+  };
+
+  // Redirect to cart if no items are available
+  if (cartItems.length === 0) {
     return (
       <div className="checkout-page-container">
         <h2 className="checkout-page-title">Checkout</h2>
@@ -54,7 +75,7 @@ const CheckoutPage = () => {
         <div className="order-summary">
           <h3>Order Summary</h3>
           <div className="summary-items">
-            {passedCartItems.map((item, index) => (
+            {cartItems.map((item, index) => (
               <div key={`${item.id}-${item.selectedSize}-${index}`} className="summary-item">
                 <div className="summary-item-details">
                   <img
@@ -74,20 +95,38 @@ const CheckoutPage = () => {
               </div>
             ))}
           </div>
+          {/* Coupon Input Section */}
+          <div className="coupon-section">
+            <input
+              type="text"
+              placeholder="Enter Coupon Code"
+              value={couponCode}
+              onChange={(e) => setCouponCode(e.target.value)}
+              className="coupon-input"
+            />
+            <Button
+              variant="outline-primary"
+              onClick={handleApplyCoupon}
+              className="apply-coupon-btn"
+            >
+              Apply
+            </Button>
+          </div>
+          {/* Totals */}
           <div className="summary-totals">
             <div className="totals-row">
               <span>Subtotal</span>
-              <span>₹{calculateSubtotal().toFixed(2)}</span>
+              <span>₹{getTotalPrice().toFixed(2)}</span>
             </div>
             {isCouponApplied && (
               <div className="totals-row discount">
                 <span>Discount (SAVE700)</span>
-                <span>-₹{DISCOUNT_AMOUNT.toFixed(2)}</span>
+                <span>-₹{discount.toFixed(2)}</span>
               </div>
             )}
             <div className="totals-row total">
               <span>Total</span>
-              <span>₹{calculateTotal().toFixed(2)}</span>
+              <span>₹{getFinalTotal().toFixed(2)}</span>
             </div>
           </div>
         </div>
@@ -131,7 +170,7 @@ const CheckoutPage = () => {
               </div>
             </div>
 
-            <div className="payment-options">
+            <div className = "payment-options">
               <h4>Payment</h4>
               <div className="payment-row">
                 <div className="payment-choice">

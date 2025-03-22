@@ -23,6 +23,7 @@ import { ReviewProvider } from "./ReviewContext/ReviewContext";
 import ScrollTag from "./components/ScrollingTag/ScrollTag";
 import CartPage from "./pages/CartPage/CartPage";
 import CheckoutPage from "./pages/Checkout/CheckoutPage";
+import MyOrders from "./components/Myorder/MyOrders";
 
 function App() {
   return (
@@ -57,6 +58,7 @@ function App() {
             <Route path="/scrolltag" element={<ScrollTag />} />
             <Route path="/cart" element={<CartPage />} />
             <Route path="/checkout" element={<CheckoutPage />} />
+            <Route path="/my-orders" element={<MyOrders />} />
            </Routes>
           <Footer />
         </ReviewProvider>

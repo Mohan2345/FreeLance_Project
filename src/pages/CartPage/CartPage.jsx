@@ -1,21 +1,25 @@
- // CartPage.jsx
-import React, { useState } from "react";
+import React from "react";
 import { Button } from "react-bootstrap";
 import { useCart } from "../../CartContext/CartContext";
 import { FiX } from "react-icons/fi";
-import { Toaster, toast } from "sonner";
+import { Toaster } from "sonner";
 import { useNavigate } from "react-router-dom";
 import "./CartPage.css";
 
 const CartPage = () => {
-  const { cartItems, removeFromCart, getTotalPrice, updateCartItemQuantity } = useCart();
-  const [couponCode, setCouponCode] = useState("");
-  const [discount, setDiscount] = useState(0);
-  const [isCouponApplied, setIsCouponApplied] = useState(false);
+  const {
+    cartItems,
+    removeFromCart,
+    getTotalPrice,
+    updateCartItemQuantity,
+    couponCode,
+    setCouponCode,
+    discount,
+    isCouponApplied,
+    applyCoupon,
+    getFinalTotal,
+  } = useCart();
   const navigate = useNavigate();
-
-  const VALID_COUPON = "SAVE700";
-  const DISCOUNT_AMOUNT = 700;
 
   const handleQuantityChange = (item, newQuantity) => {
     if (newQuantity >= 1) {
@@ -32,23 +36,7 @@ const CartPage = () => {
   };
 
   const handleApplyCoupon = () => {
-    if (couponCode.toUpperCase() === VALID_COUPON) {
-      if (isCouponApplied) {
-        toast.error("This Coupon Code is Already Applied!", { position: "top-right", duration: 2000 });
-      } else {
-        setDiscount(DISCOUNT_AMOUNT);
-        setIsCouponApplied(true);
-        toast.success("Coupon Successfully Applied!", { position: "top-right", duration: 2000 });
-      }
-    } else {
-      toast.error("Invalid Coupon Code!", { position: "top-right", duration: 2000 });
-    }
-    setCouponCode("");
-  };
-
-  const calculateFinalTotal = () => {
-    const subtotal = getTotalPrice();
-    return Math.max(0, subtotal - discount);
+    applyCoupon(couponCode);
   };
 
   return (
@@ -148,7 +136,7 @@ const CartPage = () => {
             )}
             <div className="totals-row">
               <span>Total</span>
-              <span>₹{calculateFinalTotal().toFixed(2)}</span>
+              <span>₹{getFinalTotal().toFixed(2)}</span>
             </div>
             <button className="checkout-btn professional-btn" onClick={handleCheckout}>
               Proceed to Checkout
