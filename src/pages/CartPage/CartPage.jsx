@@ -33,20 +33,20 @@ const CartPage = () => {
       if (isCouponApplied) {
         toast.error("This Coupon Code is Already Applied!", {
           position: "top-right",
-          duration: 3000,
+          duration: 2000,
         });
       } else {
         setDiscount(DISCOUNT_AMOUNT);
         setIsCouponApplied(true);
         toast.success("Coupon Successfully Applied!", {
           position: "top-right",
-          duration: 3000,
+          duration: 2000,
         });
       }
     } else {
       toast.error("Invalid Coupon Code!", {
         position: "top-right",
-        duration: 3000,
+        duration: 2000,
       });
     }
     setCouponCode("");

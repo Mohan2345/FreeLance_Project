@@ -32,7 +32,7 @@ export const CartProvider = ({ children }) => {
 
     toast.success("Added To Cart", {
       position: "top-right",
-      duration: 3000,
+      duration: 2000,
       className: "custom-toast custom-toast-success",
     });
     return true;
@@ -44,7 +44,7 @@ export const CartProvider = ({ children }) => {
     );
     toast.info("Removed From Cart", {
       position: "top-right",
-      duration: 3000,
+      duration: 2000,
       className: "custom-toast custom-toast-info",
     });
   };
@@ -56,14 +56,14 @@ export const CartProvider = ({ children }) => {
       setWishlistItems(wishlistItems.filter((item) => item.id !== product.id));
       toast.info("Removed From Wishlist", {
         position: "top-right",
-        duration: 3000,
+        duration: 2000,
         className: "custom-toast custom-toast-info",
       });
     } else {
       setWishlistItems([...wishlistItems, product]);
       toast.success("Added To Wishlist!", {
         position: "top-right",
-        duration: 3000,
+        duration: 2000,
         className: "custom-toast custom-toast-success",
       });
     }
