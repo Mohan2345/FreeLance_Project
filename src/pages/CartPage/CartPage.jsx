@@ -65,9 +65,15 @@ const CartPage = () => {
               <span>Subtotal</span>
             </div>
             {cartItems.map((item, index) => (
-              <div key={`${item.id}-${item.selectedSize}-${index}`} className="cart-table-row animate-row">
+              <div
+                key={`${item.id}-${item.selectedSize}-${index}`}
+                className="cart-table-row animate-row"
+              >
                 <div className="cart-item-product">
-                  <button className="remove-btn" onClick={() => handleRemoveItem(item)}>
+                  <button
+                    className="remove-btn"
+                    onClick={() => handleRemoveItem(item)}
+                  >
                     <FiX size={20} />
                   </button>
                   <img
@@ -116,7 +122,10 @@ const CartPage = () => {
                 onChange={(e) => setCouponCode(e.target.value)}
                 className="coupon-input"
               />
-              <button className="apply-coupon-btn professional-btn" onClick={handleApplyCoupon}>
+              <button
+                className="apply-coupon-btn professional-btn"
+                onClick={handleApplyCoupon}
+              >
                 Apply Coupon
               </button>
             </div>
@@ -138,7 +147,10 @@ const CartPage = () => {
               <span>Total</span>
               <span>₹{getFinalTotal().toFixed(2)}</span>
             </div>
-            <button className="checkout-btn professional-btn" onClick={handleCheckout}>
+            <button
+              className="checkout-btn professional-btn"
+              onClick={handleCheckout}
+            >
               Proceed to Checkout
             </button>
           </div>

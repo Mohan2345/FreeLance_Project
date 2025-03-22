@@ -1,4 +1,3 @@
- // CartContext.jsx
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { toast } from "sonner";
 
@@ -8,9 +7,9 @@ export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
   const [wishlistItems, setWishlistItems] = useState([]);
   const [orders, setOrders] = useState([]);
-  const [couponCode, setCouponCode] = useState(""); // Coupon input state
-  const [discount, setDiscount] = useState(0); // Applied discount amount
-  const [isCouponApplied, setIsCouponApplied] = useState(false); // Coupon applied flag
+  const [couponCode, setCouponCode] = useState("");
+  const [discount, setDiscount] = useState(0);
+  const [isCouponApplied, setIsCouponApplied] = useState(false);
 
   // Coupon constants
   const VALID_COUPON = "SAVE700";
@@ -99,18 +98,24 @@ export const CartProvider = ({ children }) => {
     }
 
     const order = {
-      id: Date.now(),
+      id: Date.now().toString(), // Convert to string to match input type
       date: new Date().toISOString(),
       items: [...cartItems],
-      total: getTotalPrice() - discount, // Apply discount to final total
-      appliedDiscount: discount, // Store applied discount for order history
+      total: getTotalPrice() - discount,
+      appliedDiscount: discount,
+      tracking: {
+        status: "Confirmed Order", // Match the tracking stage label
+        trackingId: `TRK${Date.now()}`,
+        updatedAt: new Date().toISOString(),
+        carrier: "Standard Shipping", // Add default carrier
+      },
     };
 
     setOrders((prevOrders) => [...prevOrders, order]);
     setCartItems([]);
-    setDiscount(0); // Reset discount after order
-    setIsCouponApplied(false); // Reset coupon status
-    setCouponCode(""); // Clear coupon input
+    setDiscount(0);
+    setIsCouponApplied(false);
+    setCouponCode("");
     toast.success("Order placed successfully!", { position: "top-right", duration: 2000 });
     return true;
   };
@@ -118,20 +123,53 @@ export const CartProvider = ({ children }) => {
   const applyCoupon = (inputCode) => {
     if (inputCode.toUpperCase() === VALID_COUPON) {
       if (isCouponApplied) {
-        toast.error("This Coupon Code is Already Applied!", { position: "top-right", duration: 2000 });
+        toast.error("This Coupon Code is Already Applied!", {
+          position: "top-right",
+          duration: 2000,
+        });
       } else {
         setDiscount(DISCOUNT_AMOUNT);
         setIsCouponApplied(true);
-        toast.success("Coupon Successfully Applied!", { position: "top-right", duration: 2000 });
+        toast.success("Coupon Successfully Applied!", {
+          position: "top-right",
+          duration: 2000,
+        });
       }
     } else {
       toast.error("Invalid Coupon Code!", { position: "top-right", duration: 2000 });
     }
-    setCouponCode(""); // Clear input after applying
+    setCouponCode("");
   };
 
   const getFinalTotal = () => {
     return Math.max(0, getTotalPrice() - discount);
+  };
+
+  const updateOrderTracking = (orderId, newStatus, trackingDetails = {}) => {
+    setOrders((prevOrders) =>
+      prevOrders.map((order) =>
+        order.id === orderId.toString()
+          ? {
+              ...order,
+              tracking: {
+                ...order.tracking,
+                status: newStatus,
+                updatedAt: new Date().toISOString(),
+                ...trackingDetails,
+              },
+            }
+          : order
+      )
+    );
+    toast.info(`Order #${orderId} status updated to "${newStatus}"`, {
+      position: "top-right",
+      duration: 2000,
+    });
+  };
+
+  const getOrderTracking = (orderId) => {
+    const order = orders.find((o) => o.id === orderId.toString()); // Ensure string comparison
+     return order ? order.tracking : null;
   };
 
   return (
@@ -141,7 +179,7 @@ export const CartProvider = ({ children }) => {
         wishlistItems,
         orders,
         couponCode,
-        setCouponCode, // Expose to update input
+        setCouponCode,
         discount,
         isCouponApplied,
         addToCart,
@@ -152,8 +190,10 @@ export const CartProvider = ({ children }) => {
         getTotalPrice,
         updateCartItemQuantity,
         completeOrder,
-        applyCoupon, // Expose coupon function
-        getFinalTotal, // Expose final total with discount
+        applyCoupon,
+        getFinalTotal,
+        updateOrderTracking,
+        getOrderTracking,
       }}
     >
       {children}

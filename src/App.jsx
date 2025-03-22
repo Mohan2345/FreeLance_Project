@@ -24,6 +24,7 @@ import ScrollTag from "./components/ScrollingTag/ScrollTag";
 import CartPage from "./pages/CartPage/CartPage";
 import CheckoutPage from "./pages/Checkout/CheckoutPage";
 import MyOrders from "./components/Myorder/MyOrders";
+import TrackOrder from "./components/TrackOrder/TrackOrder";
 
 function App() {
   return (
@@ -59,6 +60,7 @@ function App() {
             <Route path="/cart" element={<CartPage />} />
             <Route path="/checkout" element={<CheckoutPage />} />
             <Route path="/my-orders" element={<MyOrders />} />
+            <Route path="/track-order" element={<TrackOrder/>} />
            </Routes>
           <Footer />
         </ReviewProvider>

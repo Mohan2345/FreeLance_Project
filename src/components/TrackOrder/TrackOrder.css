@@ -1,0 +1,283 @@
+.track-order-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  
+  .track-order-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .track-order-form {
+    background-color: #f8f9fa;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .track-btn {
+    background-color: #28a745;
+    border: none;
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+  }
+  
+  .track-btn:hover {
+    background-color: #218838;
+  }
+  
+  .error-message {
+    color: #dc3545;
+    text-align: center;
+    font-weight: 500;
+    margin-top: 1rem;
+  }
+  
+  /* Modal Styles */
+  .tracking-modal .modal-content {
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #fff;
+  }
+  
+  .tracking-header {
+    background-color: #28a745;
+    color: #fff;
+    padding: 1rem;
+    font-weight: 600;
+    font-size: 1.25rem;
+    text-align: center;
+    border-bottom: none;
+  }
+  
+  .tracking-header .btn-close {
+    filter: invert(1);
+  }
+  
+  .tracking-info {
+    padding: 1rem;
+    background-color: #e9ecef;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #dee2e6;
+  }
+  
+  .tracking-info p {
+    margin: 0;
+    font-size: 1rem;
+    color: #333;
+  }
+  
+  .tracking-info p strong {
+    color: #2c3e50;
+  }
+  
+  .tracking-status {
+    padding: 1rem;
+    text-align: center;
+  }
+  
+  .tracking-status p {
+    margin: 0;
+    font-size: 1rem;
+    color: #333;
+  }
+  
+  .tracking-status p strong {
+    color: #2c3e50;
+  }
+  
+  .tracking-progress {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem 1rem;
+    position: relative;
+  }
+  
+  .tracking-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    flex: 1;
+  }
+  
+  .step-circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+    z-index: 1;
+  }
+  
+  .step-circle.completed {
+    background-color: #28a745;
+    color: #fff;
+    border: 2px solid #28a745;
+    animation: pulse 1s ease-in-out;
+  }
+  
+  .step-circle.pending {
+    background-color: #fff;
+    color: #dc3545;
+    border: 2px solid #dc3545;
+  }
+  
+  .step-label {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    text-align: center;
+    color: #333;
+    font-weight: 500;
+  }
+  
+  .step-line {
+    position: absolute;
+    top: 25px;
+    left: 50%;
+    width: 100%;
+    height: 4px;
+    background-color: #dc3545;
+    z-index: 0;
+  }
+  
+  .step-line.completed {
+    background-color: #28a745;
+    animation: grow 0.5s ease-in-out;
+  }
+  
+  .tracking-footer {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .view-orders-btn {
+    border-color: #28a745;
+    color: #28a745;
+    padding: 0.5rem 1.5rem;
+    font-weight: 500;
+  }
+  
+  .view-orders-btn:hover {
+    background-color: #28a745;
+    color: #fff;
+  }
+  
+  /* Animation for completed circles */
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.2);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  /* Animation for completed lines */
+  @keyframes grow {
+    0% {
+      width: 0;
+    }
+    100% {
+      width: 100%;
+    }
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .track-order-container {
+      padding: 1rem;
+    }
+  
+    .track-order-title {
+      font-size: 2rem;
+    }
+  
+    .track-order-form {
+      padding: 1.5rem;
+    }
+  
+    .track-btn {
+      width: 100%;
+    }
+  
+    .tracking-info {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  
+    .tracking-progress {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  
+    .tracking-step {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      margin: 1rem 0;
+      position: relative;
+    }
+  
+    .step-circle {
+      width: 50px;
+      height: 50px;
+    }
+  
+    .step-label {
+      margin-top: 0;
+      margin-left: 1rem;
+      text-align: left;
+      flex: 1;
+    }
+  
+    .step-line {
+      display: none;
+    }
+  
+    .tracking-footer {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  
+    .tracking-footer .btn {
+      width: 100%;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .track-order-title {
+      font-size: 1.8rem;
+    }
+  
+    .track-order-form {
+      padding: 1rem;
+    }
+  
+    .tracking-header {
+      font-size: 1.1rem;
+    }
+  
+    .tracking-info p {
+      font-size: 0.9rem;
+    }
+  
+    .tracking-status p {
+      font-size: 0.9rem;
+    }
+  }
