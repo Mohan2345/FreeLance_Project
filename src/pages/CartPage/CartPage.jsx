@@ -1,14 +1,18 @@
- // pages/CartPage.js
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import { useCart } from "../../CartContext/CartContext";
 import { FiX } from "react-icons/fi";
+import { Toaster, toast } from "sonner";
 import "./CartPage.css";
 
 const CartPage = () => {
   const { cartItems, removeFromCart, getTotalPrice, updateCartItemQuantity } = useCart();
   const [couponCode, setCouponCode] = useState("");
+  const [discount, setDiscount] = useState(0);
+  const [isCouponApplied, setIsCouponApplied] = useState(false);
+
+  const VALID_COUPON = "SAVE700";
+  const DISCOUNT_AMOUNT = 700;
 
   const handleQuantityChange = (item, newQuantity) => {
     if (newQuantity >= 1) {
@@ -25,11 +29,38 @@ const CartPage = () => {
   };
 
   const handleApplyCoupon = () => {
-    console.log("Applying coupon code:", couponCode);
+    if (couponCode.toUpperCase() === VALID_COUPON) {
+      if (isCouponApplied) {
+        toast.error("This Coupon Code is Already Applied!", {
+          position: "top-right",
+          duration: 3000,
+        });
+      } else {
+        setDiscount(DISCOUNT_AMOUNT);
+        setIsCouponApplied(true);
+        toast.success("Coupon Successfully Applied!", {
+          position: "top-right",
+          duration: 3000,
+        });
+      }
+    } else {
+      toast.error("Invalid Coupon Code!", {
+        position: "top-right",
+        duration: 3000,
+      });
+    }
+    setCouponCode("");
+  };
+
+  const calculateFinalTotal = () => {
+    const subtotal = getTotalPrice();
+    return Math.max(0, subtotal - discount);
   };
 
   return (
     <div className="cart-page-container">
+      <Toaster richColors position="top-right" />
+      
       <h2 className="cart-page-title">Shopping Cart</h2>
 
       {cartItems.length === 0 ? (
@@ -125,9 +156,15 @@ const CartPage = () => {
               <span>Subtotal</span>
               <span>₹{getTotalPrice().toFixed(2)}</span>
             </div>
+            {discount > 0 && (
+              <div className="totals-row">
+                <span>Discount</span>
+                <span>-₹{discount.toFixed(2)}</span>
+              </div>
+            )}
             <div className="totals-row">
               <span>Total</span>
-              <span>₹{getTotalPrice().toFixed(2)}</span>
+              <span>₹{calculateFinalTotal().toFixed(2)}</span>
             </div>
             <button
               className="checkout-btn professional-btn"

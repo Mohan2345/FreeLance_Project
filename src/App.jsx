@@ -22,7 +22,7 @@ import ScrollTop from "./components/ScrollTop/ScrollTop";
 import { ReviewProvider } from "./ReviewContext/ReviewContext";
 import ScrollTag from "./components/ScrollingTag/ScrollTag";
 import CartPage from "./pages/CartPage/CartPage";
-
+ 
 function App() {
   return (
     <>
@@ -55,7 +55,7 @@ function App() {
             <Route path="/womens" element={<Womens />} />
             <Route path="/scrolltag" element={<ScrollTag />} />
             <Route path="/cart" element={<CartPage />} />
-          </Routes>
+           </Routes>
           <Footer />
         </ReviewProvider>
       </CartProvider>
