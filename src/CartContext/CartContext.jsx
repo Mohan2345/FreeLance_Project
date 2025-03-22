@@ -1,20 +1,16 @@
-import React from "react";
-import { createContext, useContext, useState } from "react";
-import { toast } from "sonner"; // Changed import to use 'sonner' directly
+ // CartContext.jsx
+import React, { createContext, useContext, useState } from "react";
+import { toast } from "sonner";
 
 const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useState([]); // Resets to empty on refresh
   const [wishlistItems, setWishlistItems] = useState([]);
 
   const addToCart = (product, quantity, selectedSize) => {
     if (!selectedSize) {
-      toast.error("Please select a size", {
-        position: "top-right",
-        duration: 2000,
-        className: "custom-toast custom-toast-error",
-      });
+      toast.error("Please select a size", { position: "top-right", duration: 2000 });
       return false;
     }
 
@@ -30,11 +26,7 @@ export const CartProvider = ({ children }) => {
       setCartItems([...cartItems, { ...product, quantity, selectedSize }]);
     }
 
-    toast.success("Added To Cart", {
-      position: "top-right",
-      duration: 2000,
-      className: "custom-toast custom-toast-success",
-    });
+    toast.success("Added To Cart", { position: "top-right", duration: 2000 });
     return true;
   };
 
@@ -42,30 +34,17 @@ export const CartProvider = ({ children }) => {
     setCartItems(
       cartItems.filter((item) => !(item.id === productId && item.selectedSize === selectedSize))
     );
-    toast.info("Removed From Cart", {
-      position: "top-right",
-      duration: 2000,
-      className: "custom-toast custom-toast-info",
-    });
+    toast.info("Removed From Cart", { position: "top-right", duration: 2000 });
   };
 
   const toggleWishlist = (product) => {
     const isInWishlist = wishlistItems.some((item) => item.id === product.id);
-
     if (isInWishlist) {
       setWishlistItems(wishlistItems.filter((item) => item.id !== product.id));
-      toast.info("Removed From Wishlist", {
-        position: "top-right",
-        duration: 2000,
-        className: "custom-toast custom-toast-info",
-      });
+      toast.info("Removed From Wishlist", { position: "top-right", duration: 2000 });
     } else {
       setWishlistItems([...wishlistItems, product]);
-      toast.success("Added To Wishlist!", {
-        position: "top-right",
-        duration: 2000,
-        className: "custom-toast custom-toast-success",
-      });
+      toast.success("Added To Wishlist!", { position: "top-right", duration: 2000 });
     }
   };
 

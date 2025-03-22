@@ -1,8 +1,10 @@
+ // CartPage.jsx
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import { useCart } from "../../CartContext/CartContext";
 import { FiX } from "react-icons/fi";
 import { Toaster, toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 import "./CartPage.css";
 
 const CartPage = () => {
@@ -10,6 +12,7 @@ const CartPage = () => {
   const [couponCode, setCouponCode] = useState("");
   const [discount, setDiscount] = useState(0);
   const [isCouponApplied, setIsCouponApplied] = useState(false);
+  const navigate = useNavigate();
 
   const VALID_COUPON = "SAVE700";
   const DISCOUNT_AMOUNT = 700;
@@ -25,29 +28,20 @@ const CartPage = () => {
   };
 
   const handleCheckout = () => {
-    window.location.href = "/checkout";
+    navigate("/checkout", { state: { cartItems, discount, isCouponApplied } });
   };
 
   const handleApplyCoupon = () => {
     if (couponCode.toUpperCase() === VALID_COUPON) {
       if (isCouponApplied) {
-        toast.error("This Coupon Code is Already Applied!", {
-          position: "top-right",
-          duration: 2000,
-        });
+        toast.error("This Coupon Code is Already Applied!", { position: "top-right", duration: 2000 });
       } else {
         setDiscount(DISCOUNT_AMOUNT);
         setIsCouponApplied(true);
-        toast.success("Coupon Successfully Applied!", {
-          position: "top-right",
-          duration: 2000,
-        });
+        toast.success("Coupon Successfully Applied!", { position: "top-right", duration: 2000 });
       }
     } else {
-      toast.error("Invalid Coupon Code!", {
-        position: "top-right",
-        duration: 2000,
-      });
+      toast.error("Invalid Coupon Code!", { position: "top-right", duration: 2000 });
     }
     setCouponCode("");
   };
@@ -60,7 +54,6 @@ const CartPage = () => {
   return (
     <div className="cart-page-container">
       <Toaster richColors position="top-right" />
-      
       <h2 className="cart-page-title">Shopping Cart</h2>
 
       {cartItems.length === 0 ? (
@@ -69,7 +62,7 @@ const CartPage = () => {
           <Button
             variant="outline-primary"
             className="continue-shopping-btn professional-btn"
-            onClick={() => (window.location.href = "/")}
+            onClick={() => navigate("/")}
           >
             Continue Shopping
           </Button>
@@ -84,15 +77,9 @@ const CartPage = () => {
               <span>Subtotal</span>
             </div>
             {cartItems.map((item, index) => (
-              <div
-                key={`${item.id}-${item.selectedSize}-${index}`}
-                className="cart-table-row animate-row"
-              >
+              <div key={`${item.id}-${item.selectedSize}-${index}`} className="cart-table-row animate-row">
                 <div className="cart-item-product">
-                  <button
-                    className="remove-btn"
-                    onClick={() => handleRemoveItem(item)}
-                  >
+                  <button className="remove-btn" onClick={() => handleRemoveItem(item)}>
                     <FiX size={20} />
                   </button>
                   <img
@@ -141,10 +128,7 @@ const CartPage = () => {
                 onChange={(e) => setCouponCode(e.target.value)}
                 className="coupon-input"
               />
-              <button
-                className="apply-coupon-btn professional-btn"
-                onClick={handleApplyCoupon}
-              >
+              <button className="apply-coupon-btn professional-btn" onClick={handleApplyCoupon}>
                 Apply Coupon
               </button>
             </div>
@@ -166,10 +150,7 @@ const CartPage = () => {
               <span>Total</span>
               <span>₹{calculateFinalTotal().toFixed(2)}</span>
             </div>
-            <button
-              className="checkout-btn professional-btn"
-              onClick={handleCheckout}
-            >
+            <button className="checkout-btn professional-btn" onClick={handleCheckout}>
               Proceed to Checkout
             </button>
           </div>
