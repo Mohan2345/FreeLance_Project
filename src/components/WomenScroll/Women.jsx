@@ -1,18 +1,18 @@
-import React, { useRef, useState, useEffect } from "react";
-import "./Women.css";
-import { useNavigate } from "react-router-dom";
+ "use client"
+
+import { useRef } from "react"
+import "./Women.css"
+import video from "../../Aseets/LehengaVideo.mp4"
+import { useNavigate } from "react-router-dom"
 
 const Women = () => {
-  const scrollContainerRef = useRef(null);
-  const [isScrolling, setIsScrolling] = useState(false);
-  const [scrollDirection, setScrollDirection] = useState("forward");
-  const [startPosition, setStartPosition] = useState(0);
-  const navigate = useNavigate();
+  const scrollContainerRef = useRef(null)
+  const navigate = useNavigate()
 
-  const cards = [
+  const sareeCategories = [
     {
       id: 1,
-      title: "Hand painted Saree",
+      title: "Hand Painted Saree",
       image: "https://sareewave.com/cdn/shop/products/VSMENKA105.webp?v=1667455754&width=600",
       productType: "Hand painted Saree",
     },
@@ -24,10 +24,14 @@ const Women = () => {
     },
     {
       id: 3,
-      title: "Embroidered saree",
-      image: "https://assets.panashindia.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/2/6/2683sr08-2028.jpg",
+      title: "Embroidered Saree",
+      image:
+        "https://assets.panashindia.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/2/6/2683sr08-2028.jpg",
       productType: "Embroidered saree",
     },
+  ]
+
+  const dressCategories = [
     {
       id: 4,
       title: "Kurtaset",
@@ -40,115 +44,86 @@ const Women = () => {
       image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqMQdFreUtahcFyMxYkWXztWTSA5B9_z-xRg&s",
       productType: "Co-ordset",
     },
-  ];
-
-  const duplicatedCards = [...cards, ...cards];
-
-  const scrollLeft = () => {
-    if (scrollContainerRef.current) {
-      setStartPosition(0);
-      scrollContainerRef.current.scrollTo({
-        left: 0,
-        behavior: "smooth",
-      });
-      setScrollDirection("forward");
-    }
-  };
-
-  const scrollRight = () => {
-    if (scrollContainerRef.current) {
-      const maxScroll =
-        scrollContainerRef.current.scrollWidth -
-        scrollContainerRef.current.clientWidth;
-      const lastCardPosition = maxScroll / 2;
-      setStartPosition(lastCardPosition);
-      scrollContainerRef.current.scrollTo({
-        left: lastCardPosition,
-        behavior: "smooth",
-      });
-      setScrollDirection("reverse");
-    }
-  };
-
-  useEffect(() => {
-    const scrollContainer = scrollContainerRef.current;
-
-    const autoScroll = () => {
-      if (scrollContainer && !isScrolling) {
-        const maxScroll =
-          scrollContainer.scrollWidth - scrollContainer.clientWidth;
-        const currentScroll = scrollContainer.scrollLeft;
-
-        if (scrollDirection === "forward") {
-          scrollContainer.scrollBy({
-            left: 5,
-            behavior: "auto",
-          });
-          if (currentScroll >= maxScroll / 2) {
-            setScrollDirection("reverse");
-            setStartPosition(maxScroll / 2);
-          }
-        } else {
-          scrollContainer.scrollBy({
-            left: -5,
-            behavior: "auto",
-          });
-          if (currentScroll <= 0) {
-            setScrollDirection("forward");
-            setStartPosition(0);
-          }
-        }
-      }
-    };
-
-    const interval = setInterval(autoScroll, 50); // Adjusted interval for smoother scroll
-    return () => clearInterval(interval);
-  }, [isScrolling, scrollDirection]);
+    {
+      id: 6,
+      title: "2 Piece Kurta Set",
+      image: "https://m.media-amazon.com/images/I/51DgwCpeViL._AC_UY1100_.jpg",
+      productType: "2 Piece Kurta Set",
+    },
+  ]
 
   const handleCardClick = (productType) => {
-    navigate(`/womens?productType=${encodeURIComponent(productType)}`);
-  };
+    navigate(`/womens?productType=${encodeURIComponent(productType)}`)
+  }
 
   return (
     <section className="women-section">
-      <h2 className="women-section-title mt-5">WOMEN'S COLLECTION</h2>
-      <div className="women-scrollable-cards-container">
-        <button
-          className="women-scroll-button women-left"
-          onClick={scrollLeft}
-          aria-label="Scroll to first"
-        >
-          <span className="women-arrow">{"<"}</span>
-        </button>
-        <div
-          className="women-cards-wrapper"
-          ref={scrollContainerRef}
-          onMouseEnter={() => setIsScrolling(true)}
-          onMouseLeave={() => setIsScrolling(false)}
-        >
-          {duplicatedCards.map((card, index) => (
-            <div
-              key={`${card.id}-${index}`}
-              className="women-card"
-              onClick={() => handleCardClick(card.productType)}
-            >
-              <img src={card.image} alt={card.title} className="women-card-image" />
-              <div className="women-card-overlay">
-                <h4 className="women-card-title">{card.title}</h4>
+      <h2 className="women-section-title">Women's Collection</h2>
+
+      {/* Sarees Section */}
+      <div className="category-container">
+        <h3 className="category-title">Sarees</h3>
+        <div className="category-grid">
+          {sareeCategories.map((category) => (
+            <div key={category.id} className="category-card" onClick={() => handleCardClick(category.productType)}>
+              <img src={category.image || "/placeholder.svg"} alt={category.title} className="category-image" />
+              <div className="category-overlay">
+                <h4 className="category-card-title">{category.title}</h4>
               </div>
             </div>
           ))}
         </div>
-        <button
-          className="women-scroll-button women-right"
-          onClick={scrollRight}
-          aria-label="Scroll to last"
-        >
-          <span className="women-arrow">{">"}</span>
-        </button>
       </div>
-    </section>
-  );
-};
 
-export default Women;
+      {/* Dresses Section */}
+      <div className="category-container">
+        <h3 className="category-title">Dresses</h3>
+        <div className="category-grid">
+          {dressCategories.map((category) => (
+            <div key={category.id} className="category-card" onClick={() => handleCardClick(category.productType)}>
+              <img src={category.image || "/placeholder.svg"} alt={category.title} className="category-image" />
+              <div className="category-overlay">
+                <h4 className="category-card-title">{category.title}</h4>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Lehenga Animation Section */}
+      <h2
+        className="lehenga-title"
+        style={{
+          textAlign: "center",
+          margin: "1rem 0",
+          color: "black",
+          fontSize: "2rem",
+          fontWeight: "600",
+          fontFamily: "sans-serif",
+          textTransform: "uppercase",
+          letterSpacing: "1px",
+          lineHeight: "1.5",
+          textDecoration: "none",
+          textShadow: "2px 2px 6px rgba(0, 0, 0, 0.5)",
+          animation: "fadeInMoveUp 1s ease-in-out",
+          animationFillMode: "forwards",
+          animationDelay: "0.5s",
+          animationIterationCount: "1",
+        }}
+      >
+        Enchanting Lehengas for a Dream Wedding
+      </h2>
+
+      {/* Video Section */}
+      <section className="video-container" style={{ marginTop: "0.5rem", position: "relative" }}>
+        <video className="w-100" autoPlay loop controls src={video} />
+        <button className="shop-now-btn" onClick={() => handleCardClick("Lehenga")}>
+          SHOP NOW
+        </button>
+      </section>
+    </section>
+  )
+}
+
+export default Women
+
