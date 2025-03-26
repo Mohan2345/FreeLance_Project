@@ -116,7 +116,7 @@ const Women = () => {
 
       {/* Video Section */}
       <section className="video-container" style={{ marginTop: "0.5rem", position: "relative" }}>
-        <video className="w-100" autoPlay loop controls src={video} />
+        <video className="w-100" autoPlay loop muted playsInline controls src={video} />
         <button className="shop-now-btn" onClick={() => handleCardClick("Lehenga")}>
           SHOP NOW
         </button>
