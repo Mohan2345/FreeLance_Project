@@ -1,0 +1,125 @@
+.men-container {
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 15px;
+  overflow-x: hidden;
+}
+
+.men-section-title {
+  font-size: 2rem;
+  font-weight: 500;
+  color: #333;
+  letter-spacing: 1px;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.men-card {
+  transition: transform 0.3s ease;
+  border: none !important;
+  background: transparent;
+  height: auto !important;
+  width: 100%;
+}
+
+.men-card-img-container {
+  position: relative;
+  padding-top: 133.33%; /* 4:3 aspect ratio */
+  overflow: hidden;
+  border-radius: 16px; /* Added border-radius */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.men-card-img-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 16px; /* Matches container */
+}
+
+.men-card-title {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-top: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Responsive styles */
+@media (max-width: 1200px) {
+  .men-container {
+      max-width: 1140px;
+  }
+  
+  .men-card-img-container {
+      padding-top: 120%;
+  }
+}
+
+@media (max-width: 992px) {
+  .men-container {
+      max-width: 960px;
+  }
+  
+  .men-card-img-container {
+      padding-top: 125%;
+  }
+}
+
+@media (max-width: 768px) {
+  .men-container {
+      max-width: 720px;
+  }
+  
+  .men-section-title {
+      font-size: 1.75rem;
+  }
+
+  .men-card-title {
+      font-size: 1rem;
+  }
+  
+  .men-card-img-container {
+      padding-top: 130%;
+  }
+}
+
+@media (max-width: 576px) {
+  .men-container {
+      max-width: 100%;
+      padding: 0 10px;
+  }
+  
+  .men-section-title {
+      font-size: 1.5rem;
+  }
+  
+  .men-card-title {
+      font-size: 0.9rem;
+  }
+  
+  .men-card-img-container {
+      padding-top: 135%;
+  }
+}
+
+@media (max-width: 400px) {
+  .men-card-img-container {
+      padding-top: 140%;
+  }
+  
+  .men-card-title {
+      font-size: 0.85rem;
+  }
+}
+
+/* Ensure no horizontal scrollbar */
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+}

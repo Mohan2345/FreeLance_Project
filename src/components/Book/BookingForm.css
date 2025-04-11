@@ -1,0 +1,36 @@
+.booking-page {
+  background: rgb(238,174,202);
+  background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+}
+
+.card {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+@media (max-width: 768px) {
+  .card {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+}
+
+/* Increase the width of the message textarea */
+textarea[name="message"] {
+  width: 100%;
+  min-height: 100px;
+}
+
+/* Custom Toast Styles for Sonner */
+.custom-toast {
+  font-family: "Arial", sans-serif;
+  border-radius: 8px;
+  padding: 12px 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-size: 0.95rem;
+}
+
+.custom-toast-success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}

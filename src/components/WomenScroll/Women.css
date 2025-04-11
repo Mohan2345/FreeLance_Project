@@ -1,0 +1,249 @@
+.women-section {
+    padding: 60px 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  
+  .women-section-title {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #2c2c2c;
+    text-align: center;
+    margin-bottom: 30px;
+    letter-spacing: 0.5px;
+  }
+  
+  .category-container {
+    margin-bottom: 30px;
+  }
+  
+  .category-title {
+    font-size: 2rem;
+    font-weight: 500;
+    color: #333;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .category-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    padding: 0 20px;
+  }
+  
+  .category-card {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .category-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .category-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .category-card-title {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin: 0;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+  }
+  
+  .video-container {
+    width: 100%;
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .promo-video {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .video-overlay {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    text-align: center;
+  }
+  
+  .video-title {
+    color: white;
+    font-size: 2rem;
+    font-weight: 600;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+    margin: 0;
+  }
+  
+  /* Shop Now Button Styles */
+  .shop-now-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 12px 30px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background-color: transparent;
+    color: white;
+    border: 2px solid white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  .shop-now-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    border-color: transparent;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+  }
+  
+  .shop-now-btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.3);
+    transition: width 0.3s ease;
+    z-index: -1;
+  }
+  
+  .shop-now-btn:hover::before {
+    width: 100%;
+  }
+  
+  @keyframes fadeInMoveUp {
+    0% {
+      opacity: 0;
+      transform: translateY(20px); /* Start slightly below */
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0); /* End at original position */
+    }
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 1200px) {
+    .women-section {
+      padding: 50px 15px;
+    }
+    .category-grid {
+      gap: 20px;
+    }
+    .category-card-title {
+      font-size: 1.3rem;
+    }
+    .promo-video {
+      height: 450px;
+    }
+    .shop-now-btn {
+      padding: 10px 25px;
+      font-size: 1.1rem;
+    }
+  }
+  
+  @media (max-width: 992px) {
+    .category-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .women-section-title {
+      font-size: 2.2rem;
+    }
+    .category-title {
+      font-size: 1.8rem;
+    }
+    .promo-video {
+      height: 400px;
+    }
+    .shop-now-btn {
+      padding: 10px 20px;
+      font-size: 1rem;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .women-section {
+      padding: 40px 10px;
+    }
+    .category-grid {
+      grid-template-columns: 1fr;
+      gap: 15px;
+    }
+    .category-card-title {
+      font-size: 1.2rem;
+    }
+    .video-title {
+      font-size: 1.5rem;
+    }
+    .promo-video {
+      height: 350px;
+    }
+    .shop-now-btn {
+      padding: 8px 18px;
+      font-size: 0.9rem;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .women-section-title {
+      font-size: 1.8rem;
+      margin-bottom: 30px;
+    }
+    .category-title {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+    .category-overlay {
+      padding: 15px;
+    }
+    .category-card-title {
+      font-size: 1.1rem;
+    }
+    .promo-video {
+      height: 300px;
+    }
+    .video-title {
+      font-size: 1.3rem;
+    }
+    .shop-now-btn {
+      padding: 8px 16px;
+      font-size: 0.85rem;
+    }
+  }
+  
+  html,
+  body {
+    overflow-x: hidden;
+    width: 100%;
+  }
+  
+  
